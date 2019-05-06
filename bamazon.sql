@@ -15,5 +15,7 @@ CREATE TABLE products(
 );
 
 INSERT INTO products (product_name, department_name, price, stock_quantity)
-VALUES ("Earwax Collection Tray", 2.50, 100), ("Navel Lint Measuring Tape", 3.10, 120), ("Blanton's Single Barrel Bourgon", 60.25, 75), 
-("Mail Order Brisket in a Box", 90, 92), ()
+VALUES ("Earwax Collection Tray", "Heath and Beauty", 2.50, 100), ("Navel Lint Measuring Tape", "Home Improvement", 3.10, 120), ("Blanton's Single Barrel Bourgon","Grocery", 60.25, 75), 
+("Mail Order Beef Brisket in a Box", "Grocery", 90, 92), ("Team America Easy Button", "Electronics", 19.95, 57 ), ("Charlston Chew ", "Grocery", 2.56, 1000), 
+("Earth Worm Juice Concentrate", "Grocery", 4.95, 345), ("Imaginary Widget Organizer", "Home Improvement", 24.95, 89 ), ("Chuck Norris Certification", "Education", 29.95, 102), 
+("Roadkill Jerky Teriyaki BBQ flavor", "Grocery", 8.95, 1200 );

@@ -12,10 +12,23 @@ var connection = mysql.createConnection({
 
     // Your password
     password: "Steak12",
-    database: "top_songsDB"
+    database: "bamazonDB"
 });
 
 connection.connect(function (err) {
     if (err) throw err;
-    runSearch();
+    console.log("connected as id " + connection.threadId);
+    queryAllProducts();
+
 });
+
+
+function queryAllProducts() {
+    connection.query("SELECT * FROM products", function (err, result, fields) {
+        if (err) throw err;
+        console.log(result);
+
+    });
+
+}
+
