@@ -87,28 +87,28 @@ function buyProduct() {
                 }
             }
         ])
-        .then(function (res) {
+    //     .then(function (res) {
 
-            var purchasedItem;
-            // head: ["id", "product_name", "department_name", "price", "stock_quantity"]
-            for (var i = 0; i < res.length; i++) {
-                if (res[i].product_name) {
-                    purchasedItem = res[i];
+    //         var purchasedItem;
+    //         // head: ["id", "product_name", "department_name", "price", "stock_quantity"]
+    //         for (var i = 0; i < res.length; i++) {
+    //             if (res[i].product_name) {
+    //                 purchasedItem = res[i];
 
-                }
+    //             }
 
 
-            }
-        });
-    console.log(newproductTable.toString());
-    function err {
-        if (err) throw err;
-        console.log("Your Purchase is being finalized ")
-        buyProduct();
-
-    };
+    //         }
+    //     });
+    // console.log(purchasedItem.toString());
+    // //    this was showing an error // function (err) {
+    // //     if (err) throw err;
+    // console.log("Your Purchase is being finalized ")
+    // buyProduct();
 
 };
+
+
 
 
 
