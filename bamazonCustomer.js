@@ -71,6 +71,7 @@ function buyProduct() {
     inquirer
         .prompt([
             {
+                name: "productID",
                 type: "input",
                 message: "Welcome to Chris' Bamazon Deals and more Deals on the most excellent random products.  Please provide Product ID of the item you would like to purchase?"
             },
