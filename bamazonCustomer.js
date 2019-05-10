@@ -88,15 +88,66 @@ function buyProduct() {
                 }
             }
         ])
-    //     .then(function (res) {
+        .then(function (data) {
 
-    //         var purchasedItem;
-    //         // head: ["id", "product_name", "department_name", "price", "stock_quantity"]
-    //         for (var i = 0; i < res.length; i++) {
-    //             if (res[i].product_name) {
-    //                 purchasedItem = res[i];
+            var productID = (data.productID);
+            var prodQuantity = parseInt(data.quantity);
 
-    //             }
+            connection.query(`SELECT stock_quantity, price FROM products WHERE id = ${productID}`, function (err, res, fields) {
+                console.log(res[0].stock_quantity);
+                console.log(res[0].price);
+
+
+                var remainingInventory = res[0].stock_quantity - prodQuantity;
+                console.log(remainingInventory);
+
+                if (res[0].stock_quantity < prodQuantity) {
+                    console.log("We're sorry. We do not have enough of this in stock...");
+                } else {
+                    console.log("Your order total is {$" + (res[0].price * prodQuantity) + "}");
+                    console.log("Placing Order...  Thank you for your business!");
+
+                }
+
+                var query = connection.query(
+                    "UPDATE products SET ? WHERE ?",
+                    [
+                        {
+                            stock_quantity: remainingInventory
+                        },
+                        {
+                            id: productID
+                        }
+                    ],
+                    function (err, res) {
+                        console.log(res.affectedRows + " products updated!\n");
+                        // Call deleteProduct AFTER the UPDATE completes
+
+                        then(function (data) {
+                            var itemID = (data.itemID);
+                            var quantityInput = parseInt(data.quantity);
+
+                            // var quantityUpdate = (res[0].stock_quantity - data.quantity)
+
+
+
+
+                        });
+
+                    });
+            }
+
+
+            )
+
+
+            //         // head: ["id", "product_name", "department_name", "price", "stock_quantity"]
+            //         for (var i = 0; i < res.length; i++) {
+            //             if (res[i].product_name) {
+            //                 purchasedItem = res[i];
+
+        });
+}
 
 
     //         }
@@ -107,7 +158,6 @@ function buyProduct() {
     // console.log("Your Purchase is being finalized ")
     // buyProduct();
 
-};
 
 
 
@@ -125,38 +175,31 @@ function buyProduct() {
 
 
 
-// if (err) throw err;
-//     console.log(result);
-//     // ProductID();
+
+    // if (err) throw err;
+    //     console.log(result);
+    //     // ProductID();
 
 
 
 
 
 
-//           .then(function (answer) {
-//     connection.query(
-//         "INSERT INTO purchase SET ?",
-//         {
-//             name: answer.id,
-//             quanity: answer.quanity
+    //           .then(function (answer) {
+    //     connection.query(
+    //         "INSERT INTO purchase SET ?",
+    //         {
+    //             name: answer.id,
+    //             quanity: answer.quanity
 
-//         },
-//         function (err) {
-//             if (err) throw err;
-
-
-//         });
-
-// });
+    //         },
+    //         function (err) {
+    //             if (err) throw err;
 
 
+    //         });
 
-
-
-
-
-
+    // });
 
 
 
@@ -165,34 +208,41 @@ function buyProduct() {
 
 
 
-// function bidAuction() {
-//     // query the database for all items being auctioned
-//     connection.query("SELECT * FROM auctions", function (err, result) {
-//         if (err) throw err;
-//         // once you have the items, prompt the user for which they'd like to bid on
-//         inquirer
-//             .prompt([
-//                 {
-//                     name: "productID",
-//                     type: "rawlist",
-//                     choices: function () {
-//                         var chosenItemID = [];
-//                         for (var i = 0; i < result.length; i++) {
-//                             chosenItemID.push(result[i].item_ID);
-//                         }
-//                         return chosenItemID;
-//                     },
-//                     message: "Thanks for submitting your order.  Please confirm the quanity you would like"
-//                 },
-//                 {
-//                     name: "bid",
-//                     type: "input",
-//                     message: "How much would you like to bid?"
-//                 }
-//             ])
 
 
 
-//     })
 
-// };
+
+
+
+
+    // function bidAuction() {
+    //     // query the database for all items being auctioned
+    //     connection.query("SELECT * FROM auctions", function (err, result) {
+    //         if (err) throw err;
+    //         // once you have the items, prompt the user for which they'd like to bid on
+    //         inquirer
+    //             .prompt([
+    //                 {
+    //                     name: "productID",
+    //                     type: "rawlist",
+    //                     choices: function () {
+    //                         var chosenItemID = [];
+    //                         for (var i = 0; i < result.length; i++) {
+    //                             chosenItemID.push(result[i].item_ID);
+    //                         }
+    //                         return chosenItemID;
+    //                     },
+    //                     message: "Thanks for submitting your order.  Please confirm the quanity you would like"
+    //                 },
+    //                 {
+    //                     name: "bid",
+    //                     type: "input",
+    //                     message: "How much would you like to bid?"
+    //                 }
+    //             ])
+
+
+
+    //     })
+
